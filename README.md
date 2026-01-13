@@ -56,6 +56,12 @@ $ pnpm install -g @nestjs/cli
 $ docker-compose up -d
 ```
 
+## Seed the database
+
+```bash
+$ http://localhost:3000/seed
+```
+
 ## Stack
 
 - NestJS
