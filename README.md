@@ -56,6 +56,12 @@ $ pnpm install -g @nestjs/cli
 $ docker-compose up -d
 ```
 
+## Environment variables
+
+```bash
+$ cp .env.template .env
+```
+
 ## Seed the database
 
 ```bash
