@@ -12,13 +12,18 @@ import { appConfig } from './config/app.config';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
       load: [appConfig],
       // validationSchema: JoiValidationSchema,
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
-    MongooseModule.forRoot(process.env.MONGODB || ''),
+    MongooseModule.forRootAsync({
+      useFactory: () => ({
+        uri: process.env.MONGODB,
+      }),
+    }),
     PokemonModule,
     CommonModule,
     SeedModule,
