@@ -24,7 +24,7 @@ import { OnModuleInit } from '@nestjs/common';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGO_URL'),
+        uri: configService.get<string>('mongodb'),
       }),
     }),
     PokemonModule,
@@ -37,7 +37,10 @@ export class AppModule implements OnModuleInit {
 
   onModuleInit() {
     console.log('--- ENTORNO DETECTADO ---');
-    console.log('MONGO_URL:', this.configService.get<string>('MONGO_URL'));
-    console.log('NODE_ENV:', this.configService.get<string>('NODE_ENV'));
+    console.log(
+      'MONGO_URL (vía config):',
+      this.configService.get<string>('mongodb'),
+    );
+    console.log('NODE_ENV:', this.configService.get<string>('environment'));
   }
 }
