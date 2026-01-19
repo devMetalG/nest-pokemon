@@ -21,8 +21,10 @@ import { OnModuleInit } from '@nestjs/common';
       rootPath: join(__dirname, '..', 'public'),
     }),
     MongooseModule.forRootAsync({
-      useFactory: () => ({
-        uri: process.env.MONGO_URL,
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.get<string>('mongodb'),
       }),
     }),
     PokemonModule,
