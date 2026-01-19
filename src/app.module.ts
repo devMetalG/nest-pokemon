@@ -7,6 +7,7 @@ import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { appConfig } from './config/app.config';
+import { OnModuleInit } from '@nestjs/common';
 // import { JoiValidationSchema } from './config/joi.validation';
 
 @Module({
@@ -31,8 +32,12 @@ import { appConfig } from './config/app.config';
     SeedModule,
   ],
 })
-export class AppModule {
-  constructor() {
-    console.log(process.env.MONGO_URL);
+export class AppModule implements OnModuleInit {
+  constructor(private configService: ConfigService) {}
+
+  onModuleInit() {
+    console.log('--- ENTORNO DETECTADO ---');
+    console.log('MONGO_URL:', this.configService.get<string>('MONGO_URL'));
+    console.log('NODE_ENV:', this.configService.get<string>('NODE_ENV'));
   }
 }
