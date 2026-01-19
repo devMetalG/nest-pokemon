@@ -39,6 +39,10 @@ export class AppModule implements OnModuleInit {
       'MONGO_URL (vía config):',
       this.configService.get<string>('mongodb'),
     );
+    console.log(
+      'DEFAULT_LIMIT (vía process):',
+      this.configService.get<number>('defaultLimit'),
+    );
     console.log('NODE_ENV:', this.configService.get<string>('environment'));
   }
 }
