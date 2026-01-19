@@ -21,7 +21,7 @@ import { appConfig } from './config/app.config';
     }),
     MongooseModule.forRootAsync({
       useFactory: () => ({
-        uri: process.env.MONGODB,
+        uri: process.env.MONGO_URL,
       }),
     }),
     PokemonModule,
@@ -31,6 +31,6 @@ import { appConfig } from './config/app.config';
 })
 export class AppModule {
   constructor() {
-    console.log(process.env.MONGODB);
+    console.log(process.env.MONGO_URL);
   }
 }
