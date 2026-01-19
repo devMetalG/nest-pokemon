@@ -7,24 +7,24 @@ import { SeedModule } from './seed/seed.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { appConfig } from './config/app.config';
 import { JoiValidationSchema } from './config/joi.validation';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
       load: [appConfig],
       validationSchema: JoiValidationSchema,
     }),
-    ServeStaticModule.forRootAsync({
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
+    MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => {
-        return [
-          {
-            uri: configService.get<string>('mongodb'),
-            rootPath: join(__dirname, '..', 'public'),
-          },
-        ];
-      },
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.get<string>('mongodb'),
+      }),
     }),
     PokemonModule,
     CommonModule,
