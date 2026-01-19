@@ -16,5 +16,8 @@ async function bootstrap() {
   );
   app.setGlobalPrefix('api/v2');
   await app.listen(process.env.PORT ?? 3000);
+  console.log('--- ENTORNO DETECTADO ---');
+  console.log('MONGO_URL:', process.env.MONGO_URL);
+  console.log('NODE_ENV:', process.env.NODE_ENV);
 }
 bootstrap();
