@@ -35,6 +35,7 @@ import { OnModuleInit } from '@nestjs/common';
 export class AppModule implements OnModuleInit {
   constructor(private configService: ConfigService) {
     console.log(this.configService.get<string>('mongodb'));
+    console.log(this.configService.get<number>('defaultLimit'));
   }
 
   onModuleInit() {
