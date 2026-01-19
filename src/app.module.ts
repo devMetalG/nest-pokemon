@@ -33,7 +33,9 @@ import { OnModuleInit } from '@nestjs/common';
   ],
 })
 export class AppModule implements OnModuleInit {
-  constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService) {
+    console.log(this.configService.get<string>('mongodb'));
+  }
 
   onModuleInit() {
     console.log('--- ENTORNO DETECTADO ---');
