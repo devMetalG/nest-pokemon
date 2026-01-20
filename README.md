@@ -75,3 +75,18 @@ $ http://localhost:3000/seed
 - Docker
 - Docker Compose
 - TypeScript
+
+## Production Build
+
+1. Create `.env.prod` file
+2. Build the image
+
+```bash
+$ docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+
+3. Run the image
+
+```bash
+$ docker-compose -f docker-compose.prod.yaml up -d
+```
